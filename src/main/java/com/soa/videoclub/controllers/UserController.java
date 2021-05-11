@@ -1,29 +1,40 @@
 package com.soa.videoclub.controllers;
 
 import com.soa.videoclub.business.IUserBusiness;
+import com.soa.videoclub.business.exception.BusinessException;
+import com.soa.videoclub.business.exception.NotFoundException;
 import com.soa.videoclub.model.User;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping(value = Constantes.URL_USER)
 public class UserController {
 
     @Autowired
     private IUserBusiness userBusiness;
 
-    @RequestMapping(value="/listar", method = RequestMethod.GET)
-    public String listarAll(Model model){
-        model.addAttribute("titulo","Listado de Usuarios");
-        model.addAttribute("usuario",userBusiness.findAll());
-        return "listar";
-
-    }
+    @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> listAll() {
+		try {
+			return new ResponseEntity<List<User>>(userBusiness.findAll(), HttpStatus.OK);
+		} catch (BusinessException e) {
+			return new ResponseEntity<List<User>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
     @RequestMapping(value="/form")
     public String crear(Map<String,Object> model){

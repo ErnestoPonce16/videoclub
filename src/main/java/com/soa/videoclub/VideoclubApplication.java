@@ -8,6 +8,7 @@ public class VideoclubApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VideoclubApplication.class, args);
+        System.out.println("Ejecucion Existosa");
     }
 
 }
