@@ -1,0 +1,6 @@
+<schema name="user" version="1.1">
+  <field name="nombre" type="string" indexed="true" stored="true"/>
+  <field name="apellido" type="string" indexed="true" stored="true"/>
+  <field name="email" type="string" indexed="true" stored="true"/>
+</schema>
+

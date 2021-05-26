@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -24,17 +26,19 @@ public class UserBusiness implements IUserBusiness{
     @Transactional(readOnly = true)
     public List<User> findAll() throws BusinessException {
 		try {
-			return userDao.findAll();
+			List<User> result = StreamSupport.stream(userDao.findAll().spliterator(), false).collect(Collectors.toList());	 
+			return  result;
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}
+		
 	}
 
 
     @Override
     @Transactional(readOnly = true)
     public User findOne(int id) {
-        return userDao.findById(id).get();
+        return null;//userDao.findById(id).get();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class UserBusiness implements IUserBusiness{
     @Override
     @Transactional
     public void delete(int id) {
-        userDao.deleteById(id);
+       // userDao.deleteById(id);
     }
 
 }

@@ -1,0 +1,11 @@
+<dataConfig> 
+ <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/videoclub" user="root" password="root" batchSize="1" />  
+ <document name="user">   
+  <entity name="user" query="SELECT * FROM user">    
+   <field column="ID" name="id"/>    
+   <field column="NOMBRE" name="nombre"/>    
+   <field column="APELLIDO" name="apellido"/>    
+   <field column="EMAIL" name="email"/>       
+  </entity>  
+ </document>
+</dataConfig>

@@ -1,8 +1,11 @@
+
 version: '3'
 services:
   solr:
     image: solr:8
     container_name: solr
+    volumes:
+      - ./Solr/data:/opt/spñr/server/solr/core2
     ports:
       - "8983:8983"
     command:
@@ -11,6 +14,8 @@ services:
     networks:
       mired1:
         ipv4_address: 172.18.1.4
+
+ 
 networks:
   mired1:
     driver: bridge
